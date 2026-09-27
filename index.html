@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Experiment</title>
+</head>
+<body>
+    <h2>SHOE AUTHENTIC </h2>
+    <p>THIS SHOWS IF THE SHOES IS ORIGINAL</p>
+
+    <button onclick="getLocation()">ORIGINAL SHOES</button>
+
+    <p id="result"></p>
+
+    <script>
+        function getLocation() {
+            const result = document.getElementById("result");
+
+            if (!navigator.geolocation) {
+                result.innerHTML = "Location is not supported by this browser.";
+                return;
+            }
+
+            result.innerHTML = "Requesting your permission...";
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    result.innerHTML =
+                        "Location shared successfully!<br>" +
+                        "Latitude: " + latitude + "<br>" +
+                        "Longitude: " + longitude;
+                },
+                function(error) {
+                    result.innerHTML =
+                        "Location was not shared. Permission may have been denied.";
+                }
+            );
+        }
+    </script>
+</body>
+</html>
